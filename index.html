@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumping Beans Cafe - Specialty Coffee & Food</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for the Inter font and the coffee/beige color palette -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee': '#6F4E37', // Dark Coffee Brown
+                        'cream': '#F5F5DC',  // Beige/Cream Background
+                        'accent': '#EAB308', // Amber/Caramel Accent
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ensuring smooth scrolling for navigation links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom styling for active filter button */
+        .filter-active {
+            background-color: #EAB308; /* accent */
+            color: #6F4E37; /* coffee */
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        /* Modal Backdrop */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="font-sans bg-cream text-stone-900">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-10 bg-coffee shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold text-cream tracking-wider">
+                <span class="text-accent">🫘</span> JUMPING BEANS CAFE
+            </a>
+            <!-- Navigation Links -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#menu" class="text-cream hover:text-accent transition duration-300 font-medium">Menu</a></li>
+                    <li><a href="#hours" class="text-cream hover:text-accent transition duration-300 font-medium">Hours</a></li>
+                    <li><a href="#contact" class="text-cream hover:text-accent transition duration-300 font-medium">Contact</a></li>
+                </ul>
+            </nav>
+            <!-- Mobile Menu Placeholder -->
+            <div class="md:hidden">
+                <button class="text-cream p-2 rounded-md hover:bg-coffee/80">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-coffee/90 py-16 md:py-24 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-cream mb-4 tracking-tight">
+                Jumping Beans Cafe
+            </h1>
+            <p class="text-xl text-cream/80 italic font-light">
+                Your cozy corner for specialty coffee, delicious food, and good vibes. 🌿
+            </p>
+            <a href="#menu" class="mt-8 inline-block bg-accent text-coffee font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 transition duration-300 transform hover:scale-105">
+                Explore the Menu
+            </a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-coffee mb-4 border-b-2 border-accent inline-block pb-1">
+                Our Menu
+            </h2>
+            <p class="text-center text-lg text-stone-600 mb-8">
+                Click on any item for a description and photo. All prices are in LKR.
+            </p>
+
+            <!-- Search and Filter Controls -->
+            <div class="mb-12 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <input type="text" id="menu-search" placeholder="Search item name..."
+                       class="p-3 border-2 border-coffee/30 rounded-full w-full max-w-sm focus:outline-none focus:border-accent shadow-md transition duration-200">
+
+                <div id="category-filters" class="flex flex-wrap justify-center gap-2">
+                    <!-- Filter buttons will be generated here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Menu Content Container -->
+            <div id="menu-container" class="space-y-16">
+                <!-- Menu categories and items will be dynamically injected here -->
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="no-results" class="hidden text-center py-12">
+                <p class="text-2xl font-semibold text-stone-500">
+                    Sorry, we couldn't find any items matching your search.
+                </p>
+                <p class="mt-2 text-stone-400">Try a different search term or category.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Info Section (Hours, Address, Map) -->
+    <section id="contact" class="bg-stone-100 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <!-- Information Panel (Hours and Contact) -->
+            <div class="space-y-8">
+                <h2 class="text-3xl font-bold text-coffee mb-4">Find Us & Connect</h2>
+
+                <!-- Contact Number -->
+                <div>
+                    <h3 class="text-xl font-semibold text-accent">Contact Number</h3>
+                    <p class="text-2xl text-stone-800 font-mono">+94 (77) XXX-XXXX</p>
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <h3 class="text-xl font-semibold text-accent">Our Location</h3>
+                    <p class="text-stone-800">45, Main Street, Colombo 03</p>
+                    <p class="text-stone-800">Colombo, Sri Lanka</p>
+                </div>
+
+                <!-- Opening Hours -->
+                <div id="hours">
+                    <h3 class="text-xl font-semibold text-accent mb-2">Opening Hours</h3>
+                    <ul class="space-y-1">
+                        <li class="flex justify-between border-b border-stone-300 py-1">
+                            <span class="font-medium">Monday - Friday:</span>
+                            <span class="text-coffee font-semibold">7:30 AM - 7:00 PM</span>
+                        </li>
+                        <li class="flex justify-between border-b border-stone-300 py-1">
+                            <span class="font-medium">Saturday:</span>
+                            <span class="text-coffee font-semibold">8:00 AM - 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between py-1">
+                            <span class="font-medium">Sunday:</span>
+                            <span class="text-red-500 font-semibold">Closed</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Google Map Location -->
+            <div class="rounded-xl shadow-2xl overflow-hidden aspect-video lg:aspect-auto">
+                <h3 class="sr-only">Google Maps Location</h3>
+                <!-- Placeholder for Google Map embed -->
+                <iframe
+                    class="w-full h-full border-0"
+                    loading="lazy"
+                    allowfullscreen
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.672198080809!2d79.8661642147728!3d6.918991395009968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259275037d4e5%3A0x6e9f2d1a3c61b585!2sColombo!5e0!3m2!1sen!2slk!4v1638201600000!5m2!1sen!2slk">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-coffee text-cream py-8 text-center">
+        <p>&copy; 2025 Jumping Beans Cafe. All rights reserved.</p>
+        <p class="text-sm mt-2">Made with ☕ and good vibes.</p>
+    </footer>
+
+    <!-- Item Detail Modal (Hidden by default) -->
+    <div id="item-modal" class="modal-backdrop hidden transition-opacity duration-300 opacity-0">
+        <div class="bg-white rounded-xl shadow-2xl w-11/12 max-w-lg overflow-hidden transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+            
+            <!-- Modal Content -->
+            <div class="relative">
+                <!-- Close Button -->
+                <button onclick="closeModal()" class="absolute top-3 right-3 p-2 bg-white rounded-full shadow-lg text-coffee hover:bg-gray-100 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                
+                <!-- Image Placeholder -->
+                <img id="modal-image" class="w-full h-64 object-cover" src="" alt="Menu Item Image">
+                
+                <div class="p-6">
+                    <h3 id="modal-name" class="text-3xl font-bold text-coffee mb-2"></h3>
+                    <p id="modal-description" class="text-stone-600 mb-4"></p>
+                    <div class="flex justify-between items-center pt-4 border-t border-stone-200">
+                        <span class="text-lg text-stone-500 font-medium">Price:</span>
+                        <span id="modal-price" class="text-4xl font-extrabold text-accent"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+    <script>
+        // Menu Data Structure (New Data in LKR)
+        const menu = [
+            {
+                category: "Sandwiches & Toasties",
+                description: "Our signature bread and fillings, toasted or fresh.",
+                items: [
+                    { name: "Chicken", price: "500", description: "Classic chicken sandwich served on soft bread.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Sandwich" },
+                    { name: "Chicken & Cheese", price: "550", description: "Chicken and melted cheese, toasted to perfection.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Cheese" },
+                    { name: "Cheese & Tomato", price: "400", description: "Simple and fresh, with tomato slices.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Cheese+Tomato" },
+                    { name: "Grilled Cheese", price: "650", description: "Our signature grilled cheese blend.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Grilled+Cheese" },
+                    { name: "Egg & Cheese", price: "450", description: "A perfect blend of cooked egg and savory cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Egg+Cheese" },
+                    { name: "Egg (2 eggs)", price: "300", description: "Two eggs prepared to your liking, served on toast.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Egg+Toast" },
+                    { name: "Pol Sambol & Egg", price: "350", description: "Spicy coconut sambol with a fried egg.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Pol+Sambol+Egg" },
+                    { name: "Pol Sambol & Cheese", price: "400", description: "Spicy coconut sambol with melted cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Pol+Sambol+Cheese" },
+                    { name: "Pol Sambol, Egg & Cheese", price: "480", description: "The full trio: spicy sambol, egg, and cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Trio+Toast" },
+                    { name: "Roast Beef", price: "800", description: "Thinly sliced roast beef with mustard and lettuce.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Roast+Beef" },
+                    { name: "Smoked Chicken", price: "850", description: "Smoked chicken breast with a creamy spread.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Smoked+Chicken" },
+                    { name: "Club Sandwich (with naimiris dip)", price: "900", description: "A triple-decker classic, served with our signature spicy dip.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Club+Sandwich" },
+                    { name: "Ham & Cheese", price: "750", description: "Traditional ham and cheese combo.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Ham+Cheese" },
+                ]
+            },
+            {
+                category: "Breakfast",
+                description: "Start your day right with these favorites, available all day.",
+                items: [
+                    { name: "All Day Breakfast", price: "900", description: "Full plate with eggs, sausage, toast, and sides.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Full+Breakfast" },
+                    { name: "Scrambled Egg and Toast", price: "500", description: "Fluffy scrambled eggs served with buttered toast.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Scrambled+Eggs" },
+                    { name: "Granola Bowl", price: "800", description: "Homemade granola with yogurt and fresh fruits.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Granola+Bowl" },
+                    { name: "Waffles with Banana (honey topping)", price: "350", description: "Light waffle topped with sliced banana and honey.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Waffles+Honey" },
+                    { name: "Waffles with Banana (Chocolate topping)", price: "450", description: "Light waffle topped with sliced banana and chocolate.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Waffles+Choc" },
+                    { name: "Eggs Benedict", price: "700", description: "Poached eggs on an English muffin with hollandaise.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Eggs+Benedict" },
+                    { name: "Fruit Bowl", price: "900", description: "A selection of seasonal fresh fruits.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Fruit+Bowl" },
+                ]
+            },
+            {
+                category: "Appetizers",
+                description: "Perfect snacks for sharing or enjoying on the side.",
+                items: [
+                    { name: "French Fries", price: "600", description: "Crispy golden fries.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=French+Fries" },
+                    { name: "Mini Kievs (6pcs)", price: "750", description: "Six bite-sized chicken Kievs.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Mini+Kievs" },
+                    { name: "Nai Miris Bites (6pcs)", price: "650", description: "Six spicy chilli and cheese bites.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Nai+Miris+Bites" },
+                ]
+            },
+            {
+                category: "Omelettes",
+                description: "Custom-made fluffy omelettes, prepared fresh.",
+                items: [
+                    { name: "Sri Lankan Omelette", price: "350", description: "Omelette with local spices and vegetables.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Lankan+Omelette" },
+                    { name: "Cheese Omelette", price: "400", description: "Fluffy omelette filled with cheddar cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Cheese+Omelette" },
+                    { name: "Ham & Cheese Omelette", price: "450", description: "Omelette with ham and melted cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Ham+Cheese+Omelette" },
+                    { name: "Chicken Omelette", price: "400", description: "Omelette with diced chicken pieces.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Omelette" },
+                    { name: "Chicken & Cheese Omelette", price: "500", description: "Omelette with chicken and cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Cheese+Omelette" },
+                ]
+            },
+            {
+                category: "Salads",
+                description: "Light, fresh, and healthy bowls.",
+                items: [
+                    { name: "Garden Salad", price: "450", description: "Fresh seasonal greens with house dressing.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Garden+Salad" },
+                    { name: "Chicken Salad", price: "650", description: "Mixed greens topped with grilled chicken strips.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Chicken+Salad" },
+                    { name: "Roast Beef Salad", price: "850", description: "Greens with sliced roast beef and balsamic glaze.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Roast+Beef+Salad" },
+                    { name: "Egg Salad", price: "550", description: "Mixed greens with sliced boiled eggs.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Egg+Salad" },
+                ]
+            },
+            {
+                category: "Mains",
+                description: "Burgers, subs, and hotdogs for a satisfying meal.",
+                items: [
+                    { name: "Bockwurst Chicken Hotdog", price: "550", description: "Premium chicken Bockwurst sausage in a bun.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Chicken+Hotdog" },
+                    { name: "Traditional Hotdog", price: "450", description: "Classic sausage in a bun with condiments.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Hotdog" },
+                    { name: "Beef Hotdog", price: "600", description: "Premium beef sausage in a bun.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Beef+Hotdog" },
+                    { name: "Chicken Double Patty Burger", price: "600", description: "Two chicken patties with cheese and sauce.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Double+Burger" },
+                    { name: "Crispy Chicken Sub 6\"", price: "750", description: "Six-inch sub with crispy fried chicken.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Crispy+Sub+6" },
+                    { name: "Crispy Chicken Sub 12\"", price: "1600", description: "Twelve-inch sub with crispy fried chicken.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Crispy+Sub+12" },
+                    { name: "Spice Island Sub 6\"", price: "650", description: "Six-inch sub with a local spicy filling.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Spice+Sub+6" },
+                    { name: "Spice Island Sub 12\"", price: "1400", description: "Twelve-inch sub with a local spicy filling.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Spice+Sub+12" },
+                ]
+            },
+            {
+                category: "Fresh Juice",
+                description: "Natural and revitalizing juices.",
+                items: [
+                    { name: "Avocado Juice", price: "450", description: "Creamy avocado blended juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Avocado+Juice" },
+                    { name: "Lime Juice", price: "250", description: "Refreshing fresh lime juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Lime+Juice" },
+                    { name: "Papaya Juice", price: "350", description: "Sweet and smooth papaya juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Papaya+Juice" },
+                    { name: "Mango Juice", price: "400", description: "Tropical fresh mango juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Mango+Juice" },
+                    { name: "Watermelon Juice", price: "350", description: "Hydrating fresh watermelon juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Watermelon+Juice" },
+                ]
+            },
+            {
+                category: "Healthy Shakes & Detox",
+                description: "Boost your day with our nutritious shakes and detox blends.",
+                items: [
+                    { name: "Nourish Blend", price: "600", description: "A blend of superfoods for energy.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Nourish+Blend" },
+                    { name: "Avo & Mango Shake", price: "600", description: "Creamy blend of avocado and sweet mango.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Avo+Mango+Shake" },
+                    { name: "Root & Fruit", price: "700", description: "Detox blend of root vegetables and fruit.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Root+Fruit" },
+                    { name: "Lime & Root", price: "700", description: "Zesty lime mixed with cleansing root extracts.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Lime+Root" },
+                    { name: "Citrus Cleanse", price: "700", description: "A vibrant mix of citrus fruits for detoxification.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Citrus+Cleanse" },
+                    { name: "Ginger Shot", price: "450", description: "A powerful, invigorating shot of ginger.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Ginger+Shot" },
+                    { name: "Zesty Leaf", price: "500", description: "A green leaf-based zesty detox drink.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Zesty+Leaf" },
+                ]
+            },
+        ];
+
+        // Global state for filtering
+        let currentFilterCategory = 'All';
+        let currentSearchTerm = '';
+
+        const menuContainer = document.getElementById('menu-container');
+        const searchInput = document.getElementById('menu-search');
+        const filterContainer = document.getElementById('category-filters');
+        const noResultsMessage = document.getElementById('no-results');
+        const modal = document.getElementById('item-modal');
+
+        // Function to open the item detail modal (Uses item name and category name to find data)
+        const openModal = (itemName, categoryName) => {
+            // Find the item object from the data structure
+            const category = menu.find(c => c.category === categoryName);
+            const item = category ? category.items.find(i => i.name === itemName) : null;
+
+            if (!item) {
+                console.error('Error: Item not found in menu data.', itemName, categoryName);
+                return;
+            }
+
+            document.getElementById('modal-name').textContent = item.name;
+            document.getElementById('modal-description').textContent = item.description;
+            document.getElementById('modal-price').textContent = `LKR ${item.price}`;
+            document.getElementById('modal-image').src = item.img;
+            
+            // Handle image fallback just in case
+            document.getElementById('modal-image').onerror = function() {
+                this.onerror = null;
+                this.src = 'https://placehold.co/400x300/CCCCCC/000000?text=No+Photo+Available';
+            };
+
+            // Animate in the modal
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                modal.querySelector('div').classList.remove('scale-95');
+                modal.querySelector('div').classList.add('scale-100');
+            }, 10); // Small delay for transition to work
+            
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        };
+
+        // Function to close the item detail modal
+        const closeModal = () => {
+            // Animate out the modal
+            modal.classList.remove('opacity-100');
+            modal.querySelector('div').classList.remove('scale-100');
+            modal.querySelector('div').classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Wait for transition to finish
+            
+            document.body.style.overflow = ''; // Restore scrolling
+        };
+        
+        // Close modal when clicking outside of the content
+        modal.addEventListener('click', closeModal);
+
+
+        // Function to create an individual menu item card HTML (Reverted to List Item)
+        const createItemListItem = (item, categoryName) => {
+            // Escape single quotes in the item name for safe insertion into the onclick attribute string
+            const itemNameSafe = item.name.replace(/'/g, "\\'"); 
+
+            return `
+                <li class="flex justify-between items-center p-4 border-b border-stone-200 cursor-pointer hover:bg-cream/70 transition duration-200 rounded-md"
+                    onclick="openModal('${itemNameSafe}', '${categoryName}')">
+                    
+                    <!-- Item Name and Info (Updated: text-lg, font-medium) -->
+                    <div class="flex flex-col">
+                        <span class="text-lg font-medium text-coffee">${item.name}</span>
+                        <span class="text-sm text-stone-500 italic md:hidden">Click for details</span>
+                    </div>
+
+                    <!-- Price (Updated: text-xl, font-bold) -->
+                    <span class="text-xl font-bold text-accent">LKR ${item.price}</span>
+                    
+                </li>
+            `;
+        };
+
+        // Main rendering function that applies filters and search
+        const renderMenu = () => {
+            menuContainer.innerHTML = '';
+            let totalItemsRendered = 0;
+            const searchTermLower = currentSearchTerm.toLowerCase();
+
+            // Iterate through each category
+            menu.forEach(category => {
+                // Check if the category is currently selected in the filter
+                if (currentFilterCategory === 'All' || currentFilterCategory === category.category) {
+                    
+                    // Filter items within the category based on the search term
+                    const filteredItems = category.items.filter(item => 
+                        item.name.toLowerCase().includes(searchTermLower) || 
+                        item.description.toLowerCase().includes(searchTermLower)
+                    );
+
+                    // Only render the category heading if there are matching items
+                    if (filteredItems.length > 0) {
+                        totalItemsRendered += filteredItems.length;
+
+                        // Create Category Section with Title and Description
+                        const categorySection = document.createElement('div');
+                        categorySection.className = 'category-section';
+
+                        categorySection.innerHTML = `
+                            <div class="mb-4 mt-8 text-center">
+                                <h3 class="text-3xl font-extrabold text-coffee">${category.category}</h3>
+                                <p class="text-stone-600 italic mt-1">${category.description}</p>
+                            </div>
+                        `;
+
+                        // Create Items List
+                        const itemsList = document.createElement('ul');
+                        itemsList.className = 'bg-white rounded-xl shadow-lg divide-y divide-stone-100 max-w-4xl mx-auto';
+                        
+                        filteredItems.forEach(item => {
+                            // Pass the category name along with the item object
+                            itemsList.innerHTML += createItemListItem(item, category.category);
+                        });
+
+                        categorySection.appendChild(itemsList);
+                        menuContainer.appendChild(categorySection);
+                    }
+                }
+            });
+            
+            // Show/Hide no results message
+            if (totalItemsRendered === 0) {
+                noResultsMessage.classList.remove('hidden');
+            } else {
+                noResultsMessage.classList.add('hidden');
+            }
+        };
+
+        // Function to handle category button clicks
+        const handleCategoryClick = (categoryName) => {
+            currentFilterCategory = categoryName;
+
+            // Update button styles
+            filterContainer.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('filter-active', 'bg-accent/80', 'bg-cream', 'text-coffee', 'hover:bg-cream/70');
+                if (btn.textContent.includes(categoryName)) {
+                    btn.classList.add('filter-active', 'bg-accent/80');
+                } else {
+                    btn.classList.add('bg-white', 'text-coffee', 'hover:bg-stone-50');
+                }
+            });
+
+            renderMenu();
+        };
+
+        // Generate Category Filter Buttons on Load
+        const generateFilterButtons = () => {
+            const allCategories = ['All', ...menu.map(c => c.category)];
+            
+            allCategories.forEach(categoryName => {
+                const button = document.createElement('button');
+                button.textContent = categoryName;
+                button.className = 'py-2 px-4 rounded-full border border-coffee/30 transition duration-150 text-sm whitespace-nowrap shadow-sm';
+                
+                if (categoryName === 'All') {
+                    button.classList.add('filter-active', 'bg-accent/80');
+                } else {
+                    button.classList.add('bg-white', 'text-coffee', 'hover:bg-stone-50');
+                }
+
+                button.addEventListener('click', () => handleCategoryClick(categoryName));
+                filterContainer.appendChild(button);
+            });
+        };
+
+        // Initial setup and event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            generateFilterButtons();
+            renderMenu(); // Initial render of all items
+
+            // Search input event listener
+            searchInput.addEventListener('input', (e) => {
+                currentSearchTerm = e.target.value;
+                renderMenu();
+            });
+        });
+    </script>
+</body>
+</html>
