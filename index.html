@@ -3,551 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jumping Beans Cafe - Specialty Coffee & Food</title>
-    <!-- Load Tailwind CSS -->
+    <title>Jumping Beans Cafe & Lounge Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configure Tailwind for the Inter font and the coffee/beige color palette -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'coffee': '#6F4E37', // Dark Coffee Brown
-                        'cream': '#F5F5DC',  // Beige/Cream Background
-                        'accent': '#EAB308', // Amber/Caramel Accent
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        /* Ensuring smooth scrolling for navigation links */
-        html {
-            scroll-behavior: smooth;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f3e8; /* Soft Cream/Beige Background */
         }
-        /* Custom styling for active filter button */
-        .filter-active {
-            background-color: #EAB308; /* accent */
-            color: #6F4E37; /* coffee */
-            font-weight: 600;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        .header-bg {
+            background-color: #4b3832; /* Deep Coffee Brown */
         }
-        /* Modal Backdrop */
-        .modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 50;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .text-primary {
+            color: #4b3832;
+        }
+        .card-bg {
+            background-color: #ffffff;
+            transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .card-bg:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .menu-category-btn {
+            background-color: #e0d8c7; /* Lighter Coffee Tone */
+            color: #4b3832;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .menu-category-btn.active, .menu-category-btn:hover {
+            background-color: #795d54; /* Active/Hover Coffee Tone */
+            color: #ffffff;
+        }
+        .price-tag {
+            font-weight: 700;
+            color: #b00000; /* Subtle Red for Price */
         }
     </style>
 </head>
-<body class="font-sans bg-cream text-stone-900">
+<body class="min-h-screen">
 
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 z-10 bg-coffee shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
-            <!-- Logo -->
-            <a href="#" class="text-2xl font-bold text-cream tracking-wider">
-                <span class="text-accent">🫘</span> JUMPING BEANS CAFE
-            </a>
-            <!-- Navigation Links -->
-            <nav class="hidden md:block">
-                <ul class="flex space-x-6">
-                    <li><a href="#menu" class="text-cream hover:text-accent transition duration-300 font-medium">Menu</a></li>
-                    <li><a href="#hours" class="text-cream hover:text-accent transition duration-300 font-medium">Hours</a></li>
-                    <li><a href="#contact" class="text-cream hover:text-accent transition duration-300 font-medium">Contact</a></li>
-                </ul>
-            </nav>
-            <!-- Mobile Menu Placeholder -->
-            <div class="md:hidden">
-                <button class="text-cream p-2 rounded-md hover:bg-coffee/80">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
+    <!-- Header -->
+    <header class="header-bg text-white shadow-xl sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-extrabold tracking-tight">JUMPING BEANS</h1>
+                <p class="text-xs opacity-80">CAFE & LOUNGE</p>
             </div>
+            <!-- Updated navigation links to point to sections -->
+            <nav class="space-x-6 text-sm font-medium">
+                <a href="#menu-section" class="hover:text-amber-300">Menu</a>
+                <a href="#contact-info" class="hover:text-amber-300">Hours</a>
+                <a href="#contact-info" class="hover:text-amber-300">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-coffee/90 py-16 md:py-24 text-center">
-        <div class="max-w-3xl mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-cream mb-4 tracking-tight">
-                Jumping Beans Cafe
-            </h1>
-            <p class="text-xl text-cream/80 italic font-light">
-                Your cozy corner for specialty coffee, delicious food, and good vibes. 🌿
-            </p>
-            <a href="#menu" class="mt-8 inline-block bg-accent text-coffee font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-amber-600 transition duration-300 transform hover:scale-105">
-                Explore the Menu
-            </a>
+    <!-- Main Content Area (Menu) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <p class="text-center text-gray-600 mb-8 font-medium">Click on any item for details. All prices are in LKR.</p>
+
+        <!-- Search Bar -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <input type="text" id="search-input" oninput="filterMenu()" placeholder="Search item name..." class="flex-grow p-3 rounded-xl border-2 border-gray-300 shadow-md focus:ring-2 focus:ring-[#795d54] focus:border-[#795d54] transition duration-150">
         </div>
-    </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-bold text-center text-coffee mb-4 border-b-2 border-accent inline-block pb-1">
-                Our Menu
-            </h2>
-            <p class="text-center text-lg text-stone-600 mb-8">
-                Click on any item for a description and photo. All prices are in LKR.
-            </p>
+        <!-- Category Filters -->
+        <div id="category-filters" class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
+            <!-- Buttons populated by JS -->
+        </div>
 
-            <!-- Search and Filter Controls -->
-            <div class="mb-12 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <input type="text" id="menu-search" placeholder="Search item name..."
-                       class="p-3 border-2 border-coffee/30 rounded-full w-full max-w-sm focus:outline-none focus:border-accent shadow-md transition duration-200">
+        <!-- Menu Section -->
+        <div id="menu-section">
+            <h2 id="current-category-title" class="text-center text-4xl font-bold text-primary mb-2">All Items</h2>
+            <p class="text-center text-lg text-gray-600 mb-8" id="category-description">A collection of everything we offer, brewing up a storm!</p>
 
-                <div id="category-filters" class="flex flex-wrap justify-center gap-2">
-                    <!-- Filter buttons will be generated here by JavaScript -->
-                </div>
+            <div id="menu-list" class="grid gap-4 sm:gap-6">
+                <!-- Menu items populated by JS -->
             </div>
+        </div>
+    </main>
+    
+    <!-- Contact and Location Info Section -->
+    <section id="contact-info" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white rounded-xl shadow-2xl mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center text-primary mb-10">Find & Connect With Us</h2>
+        
+        <div class="grid md:grid-cols-2 gap-10 items-start">
+            
+            <!-- Details Column -->
+            <div class="space-y-6">
+                <!-- Address -->
+                <div class="flex items-start space-x-4">
+                    <!-- Icon for Location -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#4b3832" class="w-6 h-6 flex-shrink-0 mt-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary">Location</h3>
+                        <p class="text-gray-700">105, BAUDDALOKA MAWATHA, COLOMBO 04.</p>
+                    </div>
+                </div>
 
-            <!-- Menu Content Container -->
-            <div id="menu-container" class="space-y-16">
-                <!-- Menu categories and items will be dynamically injected here -->
+                <!-- Contact -->
+                <div class="flex items-start space-x-4">
+                    <!-- Icon for Phone -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#4b3832" class="w-6 h-6 flex-shrink-0 mt-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.35-1.005-.988-1.127a18.85 18.85 0 0 1-7.523-2.617c-.636-.263-1.282.016-1.666.577l-1.6 2.378a1.5 1.5 0 0 1-1.424.632v-.004L5.618 15.17A2.25 2.25 0 0 0 5.25 14.896v-1.372a1.125 1.125 0 0 1 1.125-1.125h2.25c.621 0 1.125-.504 1.125-1.125V6.75a1.125 1.125 0 0 1-1.125-1.125H6.75a2.25 2.25 0 0 0-2.25 2.25v1.372c0 .516.35 1.005.988 1.127a18.85 18.85 0 0 1 7.523 2.617c.636.263 1.282-.016 1.666-.577l1.6-2.378a1.5 1.5 0 0 1 1.424-.632v.004l3.193-1.649a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H16.5A1.125 1.125 0 0 1 15.375 3.375V2.25a.75.75 0 0 0-1.5 0v1.125a1.125 1.125 0 0 1-1.125 1.125H8.25A2.25 2.25 0 0 0 6 6.75V15.75c0 1.243.682 2.355 1.764 2.91L5.618 15.17z" />
+                    </svg>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary">Call Us</h3>
+                        <p class="text-gray-700">075 431 4458 / 077 731 4458</p>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class="flex items-start space-x-4">
+                    <!-- Icon for Clock -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#4b3832" class="w-6 h-6 flex-shrink-0 mt-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary">Opening Hours</h3>
+                        <p class="text-gray-700">Monday - Saturday: <span class="font-medium">7:00 AM - 6:00 PM</span></p>
+                        <p class="text-gray-700">Sunday: <span class="font-medium text-red-600">CLOSED</span></p>
+                    </div>
+                </div>
             </div>
             
-            <!-- No Results Message -->
-            <div id="no-results" class="hidden text-center py-12">
-                <p class="text-2xl font-semibold text-stone-500">
-                    Sorry, we couldn't find any items matching your search.
-                </p>
-                <p class="mt-2 text-stone-400">Try a different search term or category.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Info Section (Hours, Address, Map) -->
-    <section id="contact" class="bg-stone-100 py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-            <!-- Information Panel (Hours and Contact) -->
-            <div class="space-y-8">
-                <h2 class="text-3xl font-bold text-coffee mb-4">Find Us & Connect</h2>
-
-                <!-- Contact Number -->
-                <div>
-                    <h3 class="text-xl font-semibold text-accent">Contact Number</h3>
-                    <p class="text-2xl text-stone-800 font-mono">+94 (75) 431 4458</p>
-                </div>
-
-                <!-- Address -->
-                <div>
-                    <h3 class="text-xl font-semibold text-accent">Our Location</h3>
-                    <p class="text-stone-800">105, WSO2 Building, Baudhaloka Mawatha</p>
-                    <p class="text-stone-800">Colombo 4, Sri Lanka</p>
-                </div>
-
-                <!-- Opening Hours -->
-                <div id="hours">
-                    <h3 class="text-xl font-semibold text-accent mb-2">Opening Hours</h3>
-                    <ul class="space-y-1">
-                        <li class="flex justify-between border-b border-stone-300 py-1">
-                            <span class="font-medium">Monday - Friday:</span>
-                            <span class="text-coffee font-semibold">7:00 AM - 7:00 PM</span>
-                        </li>
-                        <li class="flex justify-between border-b border-stone-300 py-1">
-                            <span class="font-medium">Saturday:</span>
-                            <span class="text-coffee font-semibold">7:00 AM - 5:00 PM</span>
-                        </li>
-                        <li class="flex justify-between py-1">
-                            <span class="font-medium">Sunday:</span>
-                            <span class="text-red-500 font-semibold">Closed</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Google Map Location -->
-            <div class="rounded-xl shadow-2xl overflow-hidden aspect-video lg:aspect-auto">
-                <h3 class="sr-only">Google Maps Location</h3>
-                <!-- Placeholder for Google Map embed -->
-                <iframe
-                    class="w-full h-full border-0"
-                    loading="lazy"
-                    allowfullscreen
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.55957284180417!2d79.85626933870692!3d6.896205535945026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25b8807692605%3A0xc6177a78d4288e49!2sJumping%20Beans%20Cafe!5e0!3m2!1sen!2slk!4v1761403576816!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            <!-- Map Column -->
+            <div class="w-full h-[350px] md:h-[400px] overflow-hidden rounded-xl shadow-xl">
+                <!-- Google Maps Embed (made responsive) -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.953935052964!2d79.85393437634134!3d6.896113493103074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25b8807692605%3A0xc6177a78d4288e49!2sJumping%20Beans%20Cafe!5e0!3m2!1sen!2slk!4v1762090270825!5m2!1sen!2slk" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-coffee text-cream py-8 text-center">
-        <p>&copy; 2025 Jumping Beans Cafe. All rights reserved.</p>
-        <p class="text-sm mt-2">Made with ☕ and good vibes.</p>
-    </footer>
-
-    <!-- Item Detail Modal (Hidden by default) -->
-    <div id="item-modal" class="modal-backdrop hidden transition-opacity duration-300 opacity-0">
-        <div class="bg-white rounded-xl shadow-2xl w-11/12 max-w-lg overflow-hidden transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+    <!-- Detail Modal -->
+    <div id="item-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50" onclick="closeModal(event)">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full transform transition-all duration-300 scale-95" id="modal-content">
+            <h3 id="modal-item-title" class="text-3xl font-bold text-primary mb-2"></h3>
+            <p class="text-lg text-gray-600 mb-4" id="modal-item-category"></p>
             
-            <!-- Modal Content -->
-            <div class="relative">
-                <!-- Close Button -->
-                <button onclick="closeModal()" class="absolute top-3 right-3 p-2 bg-white rounded-full shadow-lg text-coffee hover:bg-gray-100 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                
-                <!-- Image Placeholder -->
-                <img id="modal-image" class="w-full h-64 object-cover" src="" alt="Menu Item Image">
-                
-                <div class="p-6">
-                    <h3 id="modal-name" class="text-3xl font-bold text-coffee mb-2"></h3>
-                    <p id="modal-description" class="text-stone-600 mb-4"></p>
-                    <div class="flex justify-between items-center pt-4 border-t border-stone-200">
-                        <span class="text-lg text-stone-500 font-medium">Price:</span>
-                        <span id="modal-price" class="text-4xl font-extrabold text-accent"></span>
-                    </div>
-                </div>
+            <div class="border-t pt-4 mt-4">
+                <p class="text-2xl font-bold price-tag mb-0">LKR <span id="modal-item-price"></span></p>
             </div>
+
+            <button onclick="closeModal()" class="mt-6 w-full p-3 rounded-lg bg-[#b00000] text-white font-semibold hover:bg-red-700 transition duration-150">Close</button>
         </div>
     </div>
-    <!-- End Modal -->
+
 
     <script>
-        // Menu Data Structure (New Data in LKR)
-        const menu = [
-            {
-                category: "Sandwiches & Toasties",
-                description: "Our signature bread and fillings, toasted or fresh.",
-                items: [
-                    { name: "Chicken", price: "500", description: "Classic chicken sandwich served on soft bread.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Sandwich" },
-                    { name: "Chicken & Cheese", price: "550", description: "Chicken and melted cheese, toasted to perfection.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Cheese" },
-                    { name: "Cheese & Tomato", price: "400", description: "Simple and fresh, with tomato slices.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Cheese+Tomato" },
-                    { name: "Grilled Cheese", price: "650", description: "Our signature grilled cheese blend.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Grilled+Cheese" },
-                    { name: "Egg & Cheese", price: "450", description: "A perfect blend of cooked egg and savory cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Egg+Cheese" },
-                    { name: "Egg (2 eggs)", price: "300", description: "Two eggs prepared to your liking, served on toast.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Egg+Toast" },
-                    { name: "Pol Sambol & Egg", price: "350", description: "Spicy coconut sambol with a fried egg.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Pol+Sambol+Egg" },
-                    { name: "Pol Sambol & Cheese", price: "400", description: "Spicy coconut sambol with melted cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Pol+Sambol+Cheese" },
-                    { name: "Pol Sambol, Egg & Cheese", price: "480", description: "The full trio: spicy sambol, egg, and cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Trio+Toast" },
-                    { name: "Roast Beef", price: "800", description: "Thinly sliced roast beef with mustard and lettuce.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Roast+Beef" },
-                    { name: "Smoked Chicken", price: "850", description: "Smoked chicken breast with a creamy spread.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Smoked+Chicken" },
-                    { name: "Club Sandwich (with naimiris dip)", price: "900", description: "A triple-decker classic, served with our signature spicy dip.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Club+Sandwich" },
-                    { name: "Ham & Cheese", price: "750", description: "Traditional ham and cheese combo.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Ham+Cheese" },
-                ]
-            },
-            {
-                category: "Breakfast",
-                description: "Start your day right with these favorites, available all day.",
-                items: [
-                    { name: "All Day Breakfast", price: "900", description: "Full plate with eggs, sausage, toast, and sides.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Full+Breakfast" },
-                    { name: "Scrambled Egg and Toast", price: "500", description: "Fluffy scrambled eggs served with buttered toast.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Scrambled+Eggs" },
-                    { name: "Granola Bowl", price: "800", description: "Homemade granola with yogurt and fresh fruits.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Granola+Bowl" },
-                    { name: "Waffles with Banana (honey topping)", price: "350", description: "Light waffle topped with sliced banana and honey.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Waffles+Honey" },
-                    { name: "Waffles with Banana (Chocolate topping)", price: "450", description: "Light waffle topped with sliced banana and chocolate.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Waffles+Choc" },
-                    { name: "Eggs Benedict", price: "700", description: "Poached eggs on an English muffin with hollandaise.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Eggs+Benedict" },
-                    { name: "Fruit Bowl", price: "900", description: "A selection of seasonal fresh fruits.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Fruit+Bowl" },
-                ]
-            },
-            {
-                category: "Appetizers",
-                description: "Perfect snacks for sharing or enjoying on the side.",
-                items: [
-                    { name: "French Fries", price: "600", description: "Crispy golden fries.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=French+Fries" },
-                    { name: "Mini Kievs (6pcs)", price: "750", description: "Six bite-sized chicken Kievs.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Mini+Kievs" },
-                    { name: "Nai Miris Bites (6pcs)", price: "650", description: "Six spicy chilli and cheese bites.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Nai+Miris+Bites" },
-                ]
-            },
-            {
-                category: "Omelettes",
-                description: "Custom-made fluffy omelettes, prepared fresh.",
-                items: [
-                    { name: "Sri Lankan Omelette", price: "350", description: "Omelette with local spices and vegetables.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Lankan+Omelette" },
-                    { name: "Cheese Omelette", price: "400", description: "Fluffy omelette filled with cheddar cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Cheese+Omelette" },
-                    { name: "Ham & Cheese Omelette", price: "450", description: "Omelette with ham and melted cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Ham+Cheese+Omelette" },
-                    { name: "Chicken Omelette", price: "400", description: "Omelette with diced chicken pieces.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Omelette" },
-                    { name: "Chicken & Cheese Omelette", price: "500", description: "Omelette with chicken and cheese.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chicken+Cheese+Omelette" },
-                ]
-            },
-            {
-                category: "Salads",
-                description: "Light, fresh, and healthy bowls.",
-                items: [
-                    { name: "Garden Salad", price: "450", description: "Fresh seasonal greens with house dressing.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Garden+Salad" },
-                    { name: "Chicken Salad", price: "650", description: "Mixed greens topped with grilled chicken strips.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Chicken+Salad" },
-                    { name: "Roast Beef Salad", price: "850", description: "Greens with sliced roast beef and balsamic glaze.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Roast+Beef+Salad" },
-                    { name: "Egg Salad", price: "550", description: "Mixed greens with sliced boiled eggs.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Egg+Salad" },
-                ]
-            },
-            {
-                category: "Mains",
-                description: "Burgers, subs, and hotdogs for a satisfying meal.",
-                items: [
-                    { name: "Bockwurst Chicken Hotdog", price: "550", description: "Premium chicken Bockwurst sausage in a bun.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Chicken+Hotdog" },
-                    { name: "Traditional Hotdog", price: "450", description: "Classic sausage in a bun with condiments.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Hotdog" },
-                    { name: "Beef Hotdog", price: "600", description: "Premium beef sausage in a bun.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Beef+Hotdog" },
-                    { name: "Chicken Double Patty Burger", price: "600", description: "Two chicken patties with cheese and sauce.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Double+Burger" },
-                    { name: "Crispy Chicken Sub 6\"", price: "750", description: "Six-inch sub with crispy fried chicken.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Crispy+Sub+6" },
-                    { name: "Crispy Chicken Sub 12\"", price: "1600", description: "Twelve-inch sub with crispy fried chicken.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Crispy+Sub+12" },
-                    { name: "Spice Island Sub 6\"", price: "650", description: "Six-inch sub with a local spicy filling.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Spice+Sub+6" },
-                    { name: "Spice Island Sub 12\"", price: "1400", description: "Twelve-inch sub with a local spicy filling.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Spice+Sub+12" },
-                ]
-            },
-            {
-                category: "Desserts & Sweet Treats",
-                description: "End your meal right with our delightful selection of cakes, sundaes, and brownies.",
-                items: [
-                    // Cakes, Pudding, Tarts
-                    { name: "Sri Lankan style cheese cake", price: "700", description: "Our rich, local-style baked cheesecake.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Lankan+Cheesecake" },
-                    { name: "Chocolate Mousse", price: "450", description: "Light and airy chocolate mousse.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chocolate+Mousse" },
-                    { name: "Chocolate Tart", price: "450", description: "Rich chocolate ganache in a crisp pastry shell.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chocolate+Tart" },
-                    { name: "Biscuit pudding", price: "350", description: "Traditional layered biscuit pudding.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Biscuit+Pudding" },
-                    { name: "Mini cake", price: "250", description: "A perfect personal-sized cake.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Mini+Cake" },
-                    { name: "Slice of Cake", price: "400", description: "A generous slice of our cake of the day.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Cake+Slice" },
-                    { name: "Bundt cake slice", price: "350", description: "A moist slice of our classic Bundt cake.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Bundt+Cake" },
-                    { name: "Chocolate cup cake", price: "250", description: "Classic chocolate cupcake.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Chocolate+Cupcake" },
-                    { name: "Eclair", price: "100", description: "Classic choux pastry filled with cream.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Eclair" },
-                    { name: "Banana Boat", price: "500", description: "A fun dessert with banana, ice cream, and toppings.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Banana+Boat" },
+        const menuData = [
+            // --- FOOD ITEMS (FIRST) ---
 
-                    // Brownies, Cookies, Bars
-                    { name: "Brownie with Ice Cream", price: "400", description: "Warm, fudgy brownie served with a scoop of vanilla ice cream.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Brownie+Sundae" },
-                    { name: "Nutty Brownie", price: "400", description: "Our rich brownie packed with mixed nuts.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Nutty+Brownie" },
-                    { name: "Cornflakes brownie", price: "450", description: "A unique, chewy brownie with a cornflakes crunch.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Cornflakes+Brownie" },
-                    { name: "Cookie Dough Brownies", price: "450", description: "Layers of cookie dough and brownie for the ultimate treat.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Cookie+Dough+Brownie" },
-                    { name: "Brownie", price: "350", description: "Our classic, fudgy chocolate brownie.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Classic+Brownie" },
-                    { name: "Cookies", price: "350", description: "Two fresh-baked cookies.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Cookies" },
-                    { name: "Cookie medium", price: "250", description: "A single, medium-sized chocolate chip cookie.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Medium+Cookie" },
-                    { name: "Dessert Bars", price: "400", description: "Chewy and sweet dessert bar.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Dessert+Bars" },
-                    
-                    // Ice Cream & Waffles
-                    { name: "JB Ice Cream Sundae", price: "450", description: "Our signature ice cream sundae with mixed toppings.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=JB+Sundae" },
-                    { name: "Ice cream premium", price: "100", description: "A scoop of premium ice cream (Vanilla, Chocolate, or Strawberry).", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Premium+Ice+Cream" },
-                    { name: "Waffle Cone (Premium)", price: "200", description: "A scoop of ice cream in a premium waffle cone.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Waffle+Cone+Premium" },
-                    { name: "Waffle Cone (Regular)", price: "150", description: "A scoop of ice cream in a regular cone.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Waffle+Cone+Regular" },
-                    { name: "Waffles with Honey Topping", price: "350", description: "A light, fresh waffle with a drizzle of honey.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Waffle+Honey" },
+            // BREAKFAST
+            { name: "All Day Breakfast - Chicken Sausages", price: 1050.00, category: "Breakfast", description: "Our hearty breakfast plate with savory chicken sausages." },
+            { name: "All Day Breakfast - Beef Sausages", price: 1100.00, category: "Breakfast", description: "Our hearty breakfast plate with savory beef sausages." },
+            { name: "Scrambled Egg & Toast", price: 550.00, category: "Breakfast", description: "Fluffy scrambled eggs served with crispy toast." },
+            { name: "Granola Bowl", price: 850.00, category: "Breakfast", description: "A healthy bowl of granola, yogurt, and fresh fruit." },
+            { name: "Waffles with Banana - Honey Topping", price: 400.00, category: "Breakfast", description: "Golden waffles topped with banana and natural honey." },
+            { name: "Waffles with Banana - Chocolate Topping", price: 500.00, category: "Breakfast", description: "Golden waffles topped with banana and rich chocolate sauce." },
+            { name: "Eggs Benedict", price: 500.00, category: "Breakfast", description: "Perfectly poached eggs with hollandaise sauce on English muffins." },
+            { name: "Fruit Bowl", price: 900.00, category: "Breakfast", description: "A selection of fresh, seasonal cut fruits." },
+            
+            // OMELETTES
+            { name: "Sri Lankan Omelette", price: 400.00, category: "Omelettes", description: "An omelette infused with traditional Sri Lankan spices." },
+            { name: "Cheese Omelette", price: 450.00, category: "Omelettes", description: "A simple, delicious omelette filled with melted cheese." },
+            { name: "Ham & Cheese Omelette", price: 500.00, category: "Omelettes", description: "A classic combination of diced ham and cheese." },
+            { name: "Chicken Omelette", price: 450.00, category: "Omelettes", description: "Omelette stuffed with tender pieces of seasoned chicken." },
+            { name: "Chicken & Cheese Omelette", price: 550.00, category: "Omelettes", description: "The perfect mix of chicken and melted cheese." },
 
-                    // Health/Specialty Items
-                    { name: "Coffee chia seed bliss", price: "450", description: "Nutritious chia seed pudding with a coffee infusion.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Coffee+Chia+Bliss" },
-                    { name: "Energy Bar", price: "450", description: "Homemade high-protein energy bar.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Energy+Bar" },
-                    { name: "Oats with Banana", price: "400", description: "Rolled oats, served warm with sliced banana and milk/honey.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Oats+Banana" },
-                    { name: "Fruitilious", price: "450", description: "A delightful mix of fresh fruit and light yogurt.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Fruitilious" },
-                    { name: "Berrilious", price: "500", description: "Berry-rich dessert or shake with a vibrant flavor.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Berrilious" },
-                    { name: "Chocolate Blast", price: "500", description: "An intense chocolate dessert creation.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Chocolate+Blast" },
-                    { name: "Double Delight", price: "300", description: "A small, satisfying two-part dessert.", img: "https://placehold.co/300x200/6F4E37/FFFFFF?text=Double+Delight" },
-                ]
-            },
-            {
-                category: "Fresh Juice",
-                description: "Natural and revitalizing juices.",
-                items: [
-                    { name: "Avocado Juice", price: "450", description: "Creamy avocado blended juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Avocado+Juice" },
-                    { name: "Lime Juice", price: "250", description: "Refreshing fresh lime juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Lime+Juice" },
-                    { name: "Papaya Juice", price: "350", description: "Sweet and smooth papaya juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Papaya+Juice" },
-                    { name: "Mango Juice", price: "400", description: "Tropical fresh mango juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Mango+Juice" },
-                    { name: "Watermelon Juice", price: "350", description: "Hydrating fresh watermelon juice.", img: "https://placehold.co/300x200/F5F5DC/6F4E37?text=Watermelon+Juice" },
-                ]
-            },
-            {
-                category: "Healthy Shakes & Detox",
-                description: "Boost your day with our nutritious shakes and detox blends.",
-                items: [
-                    { name: "Nourish Blend", price: "600", description: "A blend of superfoods for energy.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Nourish+Blend" },
-                    { name: "Avo & Mango Shake", price: "600", description: "Creamy blend of avocado and sweet mango.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Avo+Mango+Shake" },
-                    { name: "Root & Fruit", price: "700", description: "Detox blend of root vegetables and fruit.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Root+Fruit" },
-                    { name: "Lime & Root", price: "700", description: "Zesty lime mixed with cleansing root extracts.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Lime+Root" },
-                    { name: "Citrus Cleanse", price: "700", description: "A vibrant mix of citrus fruits for detoxification.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Citrus+Cleanse" },
-                    { name: "Ginger Shot", price: "450", description: "A powerful, invigorating shot of ginger.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Ginger+Shot" },
-                    { name: "Zesty Leaf", price: "500", description: "A green leaf-based zesty detox drink.", img: "https://placehold.co/300x200/EAB308/6F4E37?text=Zesty+Leaf" },
-                ]
-            },
+            // APPETIZERS
+            { name: "French Fries", price: 650.00, category: "Appetizers", description: "Crispy, golden French fries, perfect for sharing." },
+            { name: "Mini Kives (6pcs)", price: 750.00, category: "Appetizers", description: "Six pieces of savory mini kives." }, 
+
+            // SANDWICHES
+            { name: "Chicken Sandwich", price: 550.00, category: "Sandwiches", description: "Classic chicken sandwich." },
+            { name: "Cheese & Tomato Sandwich", price: 450.00, category: "Sandwiches", description: "Simple and fresh sandwich with cheese and tomato." },
+            { name: "Chicken & Cheese Sandwich", price: 600.00, category: "Sandwiches", description: "A delicious sandwich with chicken and melted cheese." },
+            { name: "Egg (2 Eggs) Sandwich", price: 350.00, category: "Sandwiches", description: "Two eggs served in a sandwich." },
+            { name: "Egg & Cheese Sandwich", price: 500.00, category: "Sandwiches", description: "Egg and cheese sandwich." },
+            { name: "Pol Sambol & Egg Sandwich", price: 400.00, category: "Sandwiches", description: "Traditional Sri Lankan pol sambol and egg sandwich." },
+            { name: "Pol Sambol & Cheese Sandwich", price: 450.00, category: "Sandwiches", description: "Traditional Sri Lankan pol sambol with cheese." },
+            { name: "Pol Sambol, Egg & Cheese Sandwich", price: 500.00, category: "Sandwiches", description: "The full Sri Lankan experience in a sandwich." },
+            { name: "Roast Beef Sandwich", price: 850.00, category: "Sandwiches", description: "Slices of tender roast beef in a sandwich." },
+            { name: "Ham & Cheese Sandwich", price: 750.00, category: "Sandwiches", description: "Slices of ham and cheese in a sandwich." },
+            { name: "Smoked Chicken Sandwich", price: 900.00, category: "Sandwiches", description: "Smoked chicken breast slices." },
+            { name: "Club Sandwich", price: 1000.00, category: "Sandwiches", description: "A triple-decker classic with all the fixings." },
+            { name: "Grilled Cheese Sandwich", price: 700.00, category: "Sandwiches", description: "Warm, gooey grilled cheese." },
+            
+            // MAINS (Includes Hotdogs/Subs/Burgers)
+            { name: "Big Chicken Hotdog", price: 550.00, category: "Mains", description: "A large chicken sausage hotdog." },
+            { name: "Traditional Hotdog", price: 450.00, category: "Mains", description: "A standard hotdog with traditional toppings." },
+            { name: "Beef Hotdog", price: 600.00, category: "Mains", description: "A savory beef sausage hotdog." },
+            { name: "Double Patty Chicken Burger", price: 750.00, category: "Mains", description: "A satisfying burger with two chicken patties." },
+            { name: "6\" Spicy Island Sub", price: 700.00, category: "Mains", description: "A 6-inch sub with a spicy island-inspired filling." },
+            { name: "12\" Spicy Island Sub", price: 1200.00, category: "Mains", description: "A 12-inch sub with a spicy island-inspired filling." },
+
+            // SALADS
+            { name: "Chicken Salad", price: 700.00, category: "Salads", description: "A light salad topped with grilled chicken." },
+            { name: "Garden (Veg) Salad", price: 500.00, category: "Salads", description: "A fresh garden vegetable salad." },
+            { name: "Roast Beef Salad", price: 900.00, category: "Salads", description: "A savory salad with roast beef slices." },
+            { name: "Egg Salad", price: 600.00, category: "Salads", description: "A simple salad featuring sliced eggs." },
+
+            // EXTRAS
+            { name: "Sausages (Side)", price: 200.00, category: "Extras", description: "A side portion of sausages." },
+            { name: "Bockwurst (Side)", price: 250.00, category: "Extras", description: "A side of smoked German sausage." },
+            { name: "Egg (Side)", price: 100.00, category: "Extras", description: "One egg, cooked to order." },
+            { name: "Toast (Side)", price: 70.00, category: "Extras", description: "A side of toasted bread." },
+            
+            // DESSERTS & SWEET TREATS (UPDATED WITH FULL LIST)
+            { name: "Sri Lankan style cheese cake", price: 700.00, category: "Desserts & Sweet Treats", description: "A traditional Sri Lankan style baked cheese cake." },
+            { name: "Chocolate Mousse", price: 450.00, category: "Desserts & Sweet Treats", description: "Light and airy chocolate mousse." },
+            { name: "Chocolate Tart", price: 450.00, category: "Desserts & Sweet Treats", description: "A classic chocolate tart." },
+            { name: "Biscuit pudding", price: 350.00, category: "Desserts & Sweet Treats", description: "A rich and creamy biscuit pudding." },
+            { name: "Mini cake", price: 250.00, category: "Desserts & Sweet Treats", description: "A small, delightful mini cake." },
+            { name: "Slice of Cake", price: 400.00, category: "Desserts & Sweet Treats", description: "A generous slice of our cake of the day." },
+            { name: "Bundt cake slice", price: 350.00, category: "Desserts & Sweet Treats", description: "A slice of delicious Bundt cake." },
+            { name: "Chocolate cup cake", price: 250.00, category: "Desserts & Sweet Treats", description: "A moist chocolate cupcake." },
+            { name: "Eclair", price: 100.00, category: "Desserts & Sweet Treats", description: "A light pastry filled with cream." },
+            { name: "Banana Boat", price: 500.00, category: "Desserts & Sweet Treats", description: "A sweet banana dessert creation." },
+            { name: "Brownie with ice Cream", price: 400.00, category: "Desserts & Sweet Treats", description: "Warm brownie served with a scoop of ice cream." },
+            { name: "Nutty Brownie", price: 400.00, category: "Desserts & Sweet Treats", description: "A rich brownie loaded with nuts." },
+            { name: "Cornflakes brownie", price: 450.00, category: "Desserts & Sweet Treats", description: "A brownie topped with a crunchy cornflake layer." },
+            { name: "Cookie Dough Brownies", price: 450.00, category: "Desserts & Sweet Treats", description: "Chewy cookie dough baked on a brownie base." },
+            { name: "Brownie", price: 350.00, category: "Desserts & Sweet Treats", description: "A single, satisfying chocolate brownie." },
+            { name: "Cookies", price: 350.00, category: "Desserts & Sweet Treats", description: "Our freshly baked cookies." },
+            { name: "Cookie medium", price: 250.00, category: "Desserts & Sweet Treats", description: "A medium-sized cookie." },
+            { name: "Dessert Bars", price: 400.00, category: "Desserts & Sweet Treats", description: "Assorted sweet dessert bars." },
+            { name: "JB Ice Cream Sundae", price: 450.00, category: "Desserts & Sweet Treats", description: "Jumping Beans' signature ice cream sundae." },
+            { name: "Ice cream premium", price: 100.00, category: "Desserts & Sweet Treats", description: "A scoop of our premium ice cream." },
+            { name: "Waffle Cone (Premium)", price: 200.00, category: "Desserts & Sweet Treats", description: "Premium ice cream in a crisp waffle cone." },
+            { name: "Waffle Cone (Regular)", price: 150.00, category: "Desserts & Sweet Treats", description: "Regular ice cream in a crisp waffle cone." },
+            { name: "Waffles with Honey Topping", price: 350.00, category: "Desserts & Sweet Treats", description: "Golden waffles served with a honey drizzle." },
+            { name: "Coffee chia seed bliss", price: 450.00, category: "Desserts & Sweet Treats", description: "A light dessert blend featuring coffee and chia seeds." },
+            { name: "Energy Bar", price: 450.00, category: "Desserts & Sweet Treats", description: "A nutritious and satisfying energy bar." },
+            { name: "Oats with banana", price: 400.00, category: "Desserts & Sweet Treats", description: "A healthy bowl of oats served with banana." },
+            { name: "Fruitilious", price: 450.00, category: "Desserts & Sweet Treats", description: "A colorful, fruit-packed treat." },
+            { name: "Berrilious", price: 500.00, category: "Desserts & Sweet Treats", description: "A berry-loaded sweet treat." },
+            { name: "Chocolate Blast", price: 500.00, category: "Desserts & Sweet Treats", description: "An explosion of chocolate flavor." },
+            { name: "Double Delight", price: 300.00, category: "Desserts & Sweet Treats", description: "A treat that offers two layers of deliciousness." },
+
+            // --- DRINKS ITEMS (LAST) ---
+
+            // HOT DRINKS
+            { name: "Espresso", price: 350.00, category: "Hot Drinks", description: "A single shot of intense espresso." },
+            { name: "Lungo", price: 400.00, category: "Hot Drinks", description: "A longer, milder espresso." },
+            { name: "Americano", price: 400.00, category: "Hot Drinks", description: "Espresso shots diluted with hot water." },
+            { name: "Cappuccino", price: 450.00, category: "Hot Drinks", description: "Espresso with frothed milk and a sprinkle of cocoa." },
+            { name: "Latte", price: 450.00, category: "Hot Drinks", description: "Smooth espresso with steamed milk and a thin layer of foam." },
+            { name: "Mocha", price: 550.00, category: "Hot Drinks", description: "A chocolate-flavored latte." },
+            { name: "Hot Chocolate", price: 500.00, category: "Hot Drinks", description: "Rich, warm hot chocolate." },
+            { name: "Milk Tea/Flavored Hot Tea", price: 150.00, category: "Hot Drinks", description: "Milk tea or your choice of flavored hot tea." },
+            { name: "Ginger Plain Tea", price: 100.00, category: "Hot Drinks", description: "Plain black tea with a hint of fresh ginger." },
+            { name: "Ginger Milk Tea", price: 200.00, category: "Hot Drinks", description: "Milk tea infused with fresh ginger." },
+
+            // COLD DRINKS
+            { name: "Iced Latte", price: 550.00, category: "Cold Drinks", description: "Chilled espresso with milk, served over ice." },
+            { name: "Mocha Frap", price: 600.00, category: "Cold Drinks", description: "A blended coffee drink with chocolate flavor." },
+            { name: "Affogato", price: 550.00, category: "Cold Drinks", description: "A scoop of vanilla ice cream drowned in a shot of hot espresso." },
+            { name: "Cold Chocolate", price: 500.00, category: "Cold Drinks", description: "Refreshing chilled chocolate milk." },
+            { name: "Ice Coffee", price: 450.00, category: "Cold Drinks", description: "Chilled black coffee." },
+            { name: "Flavored Ice Tea", price: 250.00, category: "Cold Drinks", description: "Your choice of refreshing flavored iced tea." },
+            { name: "Faluda", price: 500.00, category: "Cold Drinks", description: "A sweet, traditional South Asian beverage." },
+            { name: "Strawberry Virgin Mojito", price: 500.00, category: "Cold Drinks", description: "A refreshing, non-alcoholic strawberry mojito." },
+            { name: "Passion Fruit Virgin Mojito", price: 500.00, category: "Cold Drinks", description: "A refreshing, non-alcoholic passion fruit mojito." },
+
+            // SHAKES
+            { name: "Chocolate Milkshake", price: 500.00, category: "Shakes", description: "Classic creamy chocolate milkshake." },
+            { name: "Vanilla Shake", price: 500.00, category: "Shakes", description: "Classic creamy vanilla milkshake." },
+            { name: "Coffee Shake", price: 550.00, category: "Shakes", description: "A blended shake with coffee flavor." },
+            { name: "Banana Shake", price: 500.00, category: "Shakes", description: "Creamy banana milkshake." },
+            { name: "Milo Shake", price: 500.00, category: "Shakes", description: "A rich Milo-flavored shake." },
+
+            // FRESH JUICES
+            { name: "Lime Juice", price: 350.00, category: "Fresh Juices", description: "Freshly squeezed lime juice." },
+            { name: "Papaya Juice", price: 400.00, category: "Fresh Juices", description: "Freshly blended papaya juice." },
+            { name: "Watermelon Juice", price: 400.00, category: "Fresh Juices", description: "Freshly blended watermelon juice." },
+            { name: "Mango Juice", price: 450.00, category: "Fresh Juices", description: "Freshly blended mango juice." },
+            { name: "Avocado Juice", price: 500.00, category: "Fresh Juices", description: "Creamy, freshly blended avocado juice." },
+
+            // HEALTHY SHAKES & DETOX DRINKS
+            { name: "Nourish Blend", price: 600.00, category: "Healthy Shakes & Detox Drinks", description: "A nourishing mix of superfoods." },
+            { name: "Root & Fruit", price: 700.00, category: "Healthy Shakes & Detox Drinks", description: "A blend of healthy roots and fruits." },
+            { name: "Avo-Mango", price: 600.00, category: "Healthy Shakes & Detox Drinks", description: "A creamy blend of avocado and mango." },
+            { name: "Pistachio Pop", price: 950.00, category: "Healthy Shakes & Detox Drinks", description: "A unique, rich pistachio shake." },
+            { name: "Lime & Root", price: 700.00, category: "Healthy Shakes & Detox Drinks", description: "Refreshing lime mixed with detox roots." },
+            { name: "Citrus Cleanse", price: 700.00, category: "Healthy Shakes & Detox Drinks", description: "A powerful citrus blend for cleansing." },
+            { name: "Ginger Shot", price: 450.00, category: "Healthy Shakes & Detox Drinks", description: "A potent shot of fresh ginger." },
+            { name: "Zesty Leaf", price: 500.00, category: "Healthy Shakes & Detox Drinks", description: "A zesty, leafy green detox drink." },
+        ];
+        
+        // Define a custom order for categories (Food, Desserts, then Drinks)
+        const customCategoryOrder = [
+            "All",
+            "Breakfast",
+            "Omelettes",
+            "Appetizers",
+            "Sandwiches",
+            "Mains",
+            "Salads",
+            "Extras",
+            "Desserts & Sweet Treats", 
+            "Hot Drinks",
+            "Cold Drinks",
+            "Shakes",
+            "Fresh Juices",
+            "Healthy Shakes & Detox Drinks"
         ];
 
-        // Global state for filtering
-        let currentFilterCategory = 'All';
-        let currentSearchTerm = '';
 
-        const menuContainer = document.getElementById('menu-container');
-        const searchInput = document.getElementById('menu-search');
-        const filterContainer = document.getElementById('category-filters');
-        const noResultsMessage = document.getElementById('no-results');
-        const modal = document.getElementById('item-modal');
+        let currentFilter = 'All';
 
-        // Function to open the item detail modal (Uses item name and category name to find data)
-        const openModal = (itemName, categoryName) => {
-            // Find the item object from the data structure
-            const category = menu.find(c => c.category === categoryName);
-            const item = category ? category.items.find(i => i.name === itemName) : null;
+        const categoryDescriptions = {
+            "All": "A collection of everything we offer, brewing up a storm!",
+            "Breakfast": "The most important meal of the day, available all day.",
+            "Omelettes": "Fluffy, made-to-order omelettes with your choice of filling.",
+            "Appetizers": "Perfect snacks for sharing or enjoying on the side.",
+            "Sandwiches": "Freshly made sandwiches on soft bread.",
+            "Mains": "Our signature burgers, hotdogs, and subs.",
+            "Extras": "Side items to complement your meal.",
+            "Desserts & Sweet Treats": "The perfect sweet finish, featuring cakes, brownies, and ice cream treats.", 
+            "Salads": "Light, fresh, and healthy salad options.",
+            // Drinks are now at the end
+            "Hot Drinks": "Warm yourself up with our specialty coffee and tea selection.",
+            "Cold Drinks": "Refreshing chilled coffees and beverages.",
+            "Shakes": "Thick and creamy blended milkshakes.",
+            "Fresh Juices": "Freshly squeezed and blended fruit juices.",
+            "Healthy Shakes & Detox Drinks": "Nutrient-rich blends for a clean boost."
+        };
 
-            if (!item) {
-                console.error('Error: Item not found in menu data.', itemName, categoryName);
+        function getUniqueCategories() {
+            // Filter categories to only include those present in menuData, then enforce custom order
+            const presentCategories = new Set(menuData.map(item => item.category));
+            const orderedCategories = customCategoryOrder.filter(category => category === "All" || presentCategories.has(category));
+            return orderedCategories;
+        }
+
+        function createCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            container.innerHTML = '';
+            
+            getUniqueCategories().forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.className = `menu-category-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap shadow-sm`;
+                if (category === currentFilter) {
+                    button.classList.add('active');
+                }
+                button.onclick = () => setFilter(category);
+                container.appendChild(button);
+            });
+        }
+
+        function setFilter(category) {
+            currentFilter = category;
+            filterMenu();
+            // Update active button state
+            document.querySelectorAll('.menu-category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === category) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function filterMenu() {
+            const listContainer = document.getElementById('menu-list');
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const titleElement = document.getElementById('current-category-title');
+            const descriptionElement = document.getElementById('category-description');
+
+            listContainer.innerHTML = '';
+            
+            // Update title and description
+            titleElement.textContent = currentFilter === 'All' ? 'All Items' : currentFilter;
+            descriptionElement.textContent = categoryDescriptions[currentFilter];
+
+            const filteredItems = menuData.filter(item => {
+                const categoryMatch = currentFilter === 'All' || item.category === currentFilter;
+                const searchMatch = item.name.toLowerCase().includes(searchInput);
+                return categoryMatch && searchMatch;
+            });
+
+            if (filteredItems.length === 0) {
+                listContainer.innerHTML = `<p class="text-center text-gray-500 col-span-full py-12">No items found matching your filter and search criteria.</p>`;
                 return;
             }
 
-            document.getElementById('modal-name').textContent = item.name;
-            document.getElementById('modal-description').textContent = item.description;
-            document.getElementById('modal-price').textContent = `LKR ${item.price}`;
-            document.getElementById('modal-image').src = item.img;
-            
-            // Handle image fallback just in case
-            document.getElementById('modal-image').onerror = function() {
-                this.onerror = null;
-                this.src = 'https://placehold.co/400x300/CCCCCC/000000?text=No+Photo+Available';
-            };
+            // Optional: Re-sort filtered items based on custom order (to maintain category groupings in 'All' view)
+            const sortedItems = filteredItems.sort((a, b) => {
+                const indexA = customCategoryOrder.indexOf(a.category);
+                const indexB = customCategoryOrder.indexOf(b.category);
+                if (indexA !== indexB) {
+                    return indexA - indexB;
+                }
+                return a.name.localeCompare(b.name);
+            });
 
-            // Animate in the modal
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.add('opacity-100');
-                modal.querySelector('div').classList.remove('scale-95');
-                modal.querySelector('div').classList.add('scale-100');
-            }, 10); // Small delay for transition to work
-            
-            document.body.style.overflow = 'hidden'; // Prevent scrolling background
-        };
+            sortedItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card-bg flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg cursor-pointer';
+                card.onclick = () => showItemDetails(item);
 
-        // Function to close the item detail modal
-        const closeModal = () => {
-            // Animate out the modal
-            modal.classList.remove('opacity-100');
-            modal.querySelector('div').classList.remove('scale-100');
-            modal.querySelector('div').classList.add('scale-95');
-            
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300); // Wait for transition to finish
-            
-            document.body.style.overflow = ''; // Restore scrolling
-        };
-        
-        // Close modal when clicking outside of the content
-        modal.addEventListener('click', closeModal);
-
-
-        // Function to create an individual menu item card HTML (Reverted to List Item)
-        const createItemListItem = (item, categoryName) => {
-            // Escape single quotes in the item name for safe insertion into the onclick attribute string
-            const itemNameSafe = item.name.replace(/'/g, "\\'"); 
-
-            return `
-                <li class="flex justify-between items-center p-4 border-b border-stone-200 cursor-pointer hover:bg-cream/70 transition duration-200 rounded-md"
-                    onclick="openModal('${itemNameSafe}', '${categoryName}')">
-                    
-                    <!-- Item Name and Info (Updated: text-lg, font-medium) -->
-                    <div class="flex flex-col">
-                        <span class="text-lg font-medium text-coffee">${item.name}</span>
-                        <span class="text-sm text-stone-500 italic md:hidden">Click for details</span>
+                card.innerHTML = `
+                    <div>
+                        <p class="text-xl sm:text-2xl font-semibold text-primary">${item.name}</p>
+                        <p class="text-xs sm:text-sm text-gray-500 mt-1">${item.category}</p>
                     </div>
-
-                    <!-- Price (Updated: text-xl, font-bold) -->
-                    <span class="text-xl font-bold text-accent">LKR ${item.price}</span>
-                    
-                </li>
-            `;
-        };
-
-        // Main rendering function that applies filters and search
-        const renderMenu = () => {
-            menuContainer.innerHTML = '';
-            let totalItemsRendered = 0;
-            const searchTermLower = currentSearchTerm.toLowerCase();
-
-            // Iterate through each category
-            menu.forEach(category => {
-                // Check if the category is currently selected in the filter
-                if (currentFilterCategory === 'All' || currentFilterCategory === category.category) {
-                    
-                    // Filter items within the category based on the search term
-                    const filteredItems = category.items.filter(item => 
-                        item.name.toLowerCase().includes(searchTermLower) || 
-                        item.description.toLowerCase().includes(searchTermLower)
-                    );
-
-                    // Only render the category heading if there are matching items
-                    if (filteredItems.length > 0) {
-                        totalItemsRendered += filteredItems.length;
-
-                        // Create Category Section with Title and Description
-                        const categorySection = document.createElement('div');
-                        categorySection.className = 'category-section';
-
-                        categorySection.innerHTML = `
-                            <div class="mb-4 mt-8 text-center">
-                                <h3 class="text-3xl font-extrabold text-coffee">${category.category}</h3>
-                                <p class="text-stone-600 italic mt-1">${category.description}</p>
-                            </div>
-                        `;
-
-                        // Create Items List
-                        const itemsList = document.createElement('ul');
-                        itemsList.className = 'bg-white rounded-xl shadow-lg divide-y divide-stone-100 max-w-4xl mx-auto';
-                        
-                        filteredItems.forEach(item => {
-                            // Pass the category name along with the item object
-                            itemsList.innerHTML += createItemListItem(item, category.category);
-                        });
-
-                        categorySection.appendChild(itemsList);
-                        menuContainer.appendChild(categorySection);
-                    }
-                }
+                    <p class="text-lg sm:text-xl font-bold price-tag whitespace-nowrap">LKR ${item.price.toFixed(2)}</p>
+                `;
+                listContainer.appendChild(card);
             });
+        }
+
+        function showItemDetails(item) {
+            const modal = document.getElementById('item-modal');
+            document.getElementById('modal-item-title').textContent = item.name;
+            document.getElementById('modal-item-category').textContent = item.category;
+            document.getElementById('modal-item-price').textContent = item.price.toFixed(2);
             
-            // Show/Hide no results message
-            if (totalItemsRendered === 0) {
-                noResultsMessage.classList.remove('hidden');
-            } else {
-                noResultsMessage.classList.add('hidden');
+            // Show modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('modal-content').classList.remove('scale-95');
+            document.getElementById('modal-content').classList.add('scale-100');
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('item-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Only close if clicking the close button or the backdrop (not the modal content itself)
+            if (event === undefined || event.target.id === 'item-modal') {
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 150); // Match transition duration
             }
+        }
+
+        // Initialize menu on load
+        window.onload = () => {
+            createCategoryFilters();
+            filterMenu();
         };
 
-        // Function to handle category button clicks
-        const handleCategoryClick = (categoryName) => {
-            currentFilterCategory = categoryName;
-
-            // Update button styles
-            filterContainer.querySelectorAll('button').forEach(btn => {
-                btn.classList.remove('filter-active', 'bg-accent/80', 'bg-cream', 'text-coffee', 'hover:bg-cream/70');
-                if (btn.textContent.includes(categoryName)) {
-                    btn.classList.add('filter-active', 'bg-accent/80');
-                } else {
-                    btn.classList.add('bg-white', 'text-coffee', 'hover:bg-stone-50');
-                }
-            });
-
-            renderMenu();
-        };
-
-        // Generate Category Filter Buttons on Load
-        const generateFilterButtons = () => {
-            const allCategories = ['All', ...menu.map(c => c.category)];
-            
-            allCategories.forEach(categoryName => {
-                const button = document.createElement('button');
-                button.textContent = categoryName;
-                button.className = 'py-2 px-4 rounded-full border border-coffee/30 transition duration-150 text-sm whitespace-nowrap shadow-sm';
-                
-                if (categoryName === 'All') {
-                    button.classList.add('filter-active', 'bg-accent/80');
-                } else {
-                    button.classList.add('bg-white', 'text-coffee', 'hover:bg-stone-50');
-                }
-
-                button.addEventListener('click', () => handleCategoryClick(categoryName));
-                filterContainer.appendChild(button);
-            });
-        };
-
-        // Initial setup and event listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            generateFilterButtons();
-            renderMenu(); // Initial render of all items
-
-            // Search input event listener
-            searchInput.addEventListener('input', (e) => {
-                currentSearchTerm = e.target.value;
-                renderMenu();
-            });
-        });
     </script>
 </body>
 </html>
