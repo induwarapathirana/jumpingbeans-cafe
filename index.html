@@ -577,3 +577,162 @@
     </script>
 </body>
 </html>
+
+<script>
+/* ====================  ADD-TO-CART FEATURE  ==================== */
+let cart = [];                     // items currently in the cart
+const cartBadge = document.createElement('span');
+cartBadge.className = 'absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center opacity-0 transition-opacity';
+cartBadge.id = 'cart-badge';
+
+// Add a cart icon to the header (right side, next to navigation)
+const headerNav = document.querySelector('header nav');
+const cartBtn = document.createElement('button');
+cartBtn.className = 'relative ml-4 sm:ml-6 text-white hover:text-accent transition';
+cartBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+`;
+cartBtn.appendChild(cartBadge);
+cartBtn.onclick = toggleCartModal;
+headerNav.appendChild(cartBtn);
+
+/* ---- Cart Modal (hidden by default) ---- */
+const cartModal = document.createElement('div');
+cartModal.id = 'cart-modal';
+cartModal.className = 'fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50 transition-opacity duration-300 opacity-0';
+cartModal.onclick = (e) => { if (e.target.id === 'cart-modal') closeCartModal(); };
+document.body.appendChild(cartModal);
+
+const cartContent = document.createElement('div');
+cartContent.id = 'cart-content';
+cartContent.className = 'bg-white p-6 sm:p-8 rounded-3xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto scale-90';
+cartModal.appendChild(cartContent);
+
+/* ---- Helper: update badge ---- */
+function updateBadge() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    cartBadge.textContent = total;
+    cartBadge.classList.toggle('opacity-0', total === 0);
+}
+
+/* ---- Add "Add to Cart" button inside each menu card ---- */
+function enhanceCard(card, item) {
+    const addBtn = document.createElement('button');
+    addBtn.textContent = '+';
+    addBtn.className = 'ml-3 bg-accent text-white w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold hover:bg-[#8f4726] transition';
+    addBtn.onclick = (e) => {
+        e.stopPropagation();               // prevent opening the detail modal
+        const existing = cart.find(i => i.name === item.name);
+        if (existing) existing.qty++;
+        else cart.push({ ...item, qty: 1 });
+        updateBadge();
+    };
+    card.querySelector('.flex').appendChild(addBtn);
+}
+
+/* ---- Render cart items ---- */
+function renderCart() {
+    cartContent.innerHTML = '';
+    if (cart.length === 0) {
+        cartContent.innerHTML = `<p class="text-center text-gray-500 py-8">Your cart is empty.</p>`;
+        return;
+    }
+
+    const list = document.createElement('div');
+    list.className = 'space-y-3 mb-6';
+
+    let totalPrice = 0;
+    cart.forEach((it, idx) => {
+        const price = it.price * it.qty;
+        totalPrice += price;
+
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between bg-gray-50 p-3 rounded-xl';
+        row.innerHTML = `
+            <div class="flex-1">
+                <p class="font-medium text-espresso">${it.name}</p>
+                <p class="text-xs text-gray-500">${it.category}</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="w-7 h-7 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold" 
+                        onclick="changeQty(${idx}, -1)">-</button>
+                <span class="w-8 text-center font-semibold">${it.qty}</span>
+                <button class="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold" 
+                        onclick="changeQty(${idx}, 1)">+</button>
+            </div>
+            <p class="ml-3 font-bold price-tag">LKR ${price.toFixed(2)}</p>
+        `;
+        list.appendChild(row);
+    });
+
+    const totalRow = document.createElement('div');
+    totalRow.className = 'border-t pt-3 flex justify-between font-bold text-lg';
+    totalRow.innerHTML = `
+        <span>Total:</span>
+        <span class="price-tag">LKR ${totalPrice.toFixed(2)}</span>
+    `;
+
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = 'Clear Cart';
+    clearBtn.className = 'mt-4 w-full p-3 rounded-xl bg-gray-300 text-espresso font-bold hover:bg-gray-400 transition';
+    clearBtn.onclick = () => { cart = []; renderCart(); updateBadge(); };
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Close';
+    closeBtn.className = 'mt-2 w-full p-3 rounded-xl bg-accent text-white font-bold hover:bg-[#8f4726] transition';
+    closeBtn.onclick = closeCartModal;
+
+    cartContent.append(list, totalRow, clearBtn, closeBtn);
+}
+
+/* ---- Qty change ---- */
+window.changeQty = (idx, delta) => {
+    const it = cart[idx];
+    it.qty += delta;
+    if (it.qty <= 0) cart.splice(idx, 1);
+    renderCart();
+    updateBadge();
+};
+
+/* ---- Modal open/close ---- */
+function toggleCartModal() {
+    if (cartModal.classList.contains('hidden')) {
+        renderCart();
+        cartModal.classList.remove('hidden', 'opacity-0');
+        cartModal.classList.add('flex', 'opacity-100');
+        cartContent.classList.remove('scale-90');
+        cartContent.classList.add('scale-100');
+        document.body.style.overflow = 'hidden';
+    } else closeCartModal();
+}
+function closeCartModal() {
+    cartContent.classList.remove('scale-100');
+    cartContent.classList.add('scale-90');
+    cartModal.classList.remove('opacity-100');
+    cartModal.classList.add('opacity-0');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+        cartModal.classList.add('hidden');
+        cartModal.classList.remove('flex');
+    }, 300);
+}
+
+/* ---- Hook into existing card creation (inside filterAndRenderItems) ---- */
+const originalFilterAndRenderItems = filterAndRenderItems;
+filterAndRenderItems = function (searchInput) {
+    originalFilterAndRenderItems(searchInput);
+
+    // After cards are added to DOM, enhance each with an Add button
+    document.querySelectorAll('#menu-list .menu-card').forEach((card, i) => {
+        const item = filteredItems[i];               // filteredItems is in the closure of original function
+        if (item && !card.querySelector('button')) { // avoid double-add
+            enhanceCard(card, item);
+        }
+    });
+};
+
+/* ---- Re-run enhancement on initial load (window.onload already calls filterAndRenderItems) ---- */
+</script>
